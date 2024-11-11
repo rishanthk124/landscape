@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+    - name: Install prerequisites
+      apt:
+        name: ['apache2', 'landscape-server-quickstart']
+        state: present
+        update_cache: yes
+
+    - name: Enable and start Apache2 service
+      service:
+        name: apache2
+        state: started
+        enabled: true
+
+    - name: Run the Landscape server quickstart
+      command: landscape-server-quickstart
